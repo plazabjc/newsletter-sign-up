@@ -1,7 +1,7 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const items = [
@@ -22,13 +22,15 @@ export default function Home() {
     e.preventDefault();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setIsValidEmail(emailRegex.test(email));
+  };
 
+  useEffect(() => {
     if (isValidEmail) {
       console.log("Valid email.");
     } else {
       console.log("Invalid email");
     }
-  };
+  }, [isValidEmail]);
 
   return (
     <div className={styles.container}>
