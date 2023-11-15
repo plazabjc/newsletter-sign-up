@@ -1,7 +1,7 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const items = [
@@ -12,6 +12,7 @@ export default function Home() {
 
   const [email, setEmail] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(true);
+  const router = useRouter();
 
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
@@ -21,16 +22,16 @@ export default function Home() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    setIsValidEmail(emailRegex.test(email));
-  };
+    const isValid = emailRegex.test(email);
+    setIsValidEmail(isValid);
 
-  useEffect(() => {
-    if (isValidEmail) {
+    if (isValid) {
       console.log("Valid email.");
+      router.push("/posts/success");
     } else {
       console.log("Invalid email");
     }
-  }, [isValidEmail]);
+  };
 
   return (
     <div className={styles.container}>
