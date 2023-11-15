@@ -1,6 +1,7 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Home() {
   const items = [
@@ -8,6 +9,26 @@ export default function Home() {
     { text: "Measuring to ensure updates are a success" },
     { text: "And much more" },
   ];
+
+  const [email, setEmail] = useState("");
+  const [isValidEmail, setIsValidEmail] = useState(true);
+
+  const handleInputChange = (e) => {
+    const inputValue = e.target.value;
+    setEmail(inputValue);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setIsValidEmail(emailRegex.test(email));
+
+    if (isValidEmail) {
+      console.log("Valid email.");
+    } else {
+      console.log("Invalid email");
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -20,18 +41,40 @@ export default function Home() {
         <div className={styles.gridContent}>
           <div className={styles.grid}>
             <div className={styles.card}>
-              <h3>Stay updated!</h3>
+              <h1>Stay updated!</h1>
               <p>Join 60,000+ product managers receiving monthly updates on:</p>
-              <ul className={styles.imageList}>
+              <ul className={styles.listContent}>
                 {items.map((item, index) => (
                   <li key={index}>
-                    <img src="/images/icon-list.svg" alt="Common Image" />
+                    <img
+                      src="/images/icon-list.svg"
+                      alt="Common Image"
+                      className={styles.imageList}
+                    />
                     {item.text}
                   </li>
                 ))}
               </ul>
+
+              <div className={styles.formContent}>
+                {!isValidEmail && (
+                  <p style={{ color: "red" }}>Valid email required</p>
+                )}
+                <form onSubmit={handleSubmit} noValidate>
+                  <label>
+                    Email address
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </label>
+                  <button type="submit">Subscribe to monthly newsletter</button>
+                </form>
+              </div>
             </div>
-            <div className={styles.card}>
+            <div className={styles.cardImg}>
               <img
                 src="/images/illustration-sign-up-desktop.svg"
                 alt="Common Image"
