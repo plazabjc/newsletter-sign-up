@@ -60,17 +60,20 @@ export default function Home() {
               </ul>
 
               <div className={styles.formContent}>
-                {!isValidEmail && (
-                  <p style={{ color: "red" }}>Valid email required</p>
-                )}
                 <form onSubmit={handleSubmit} noValidate>
                   <label>
                     Email address
+                    {!isValidEmail && (
+                      <p className={styles.invalidEmail}>
+                        Valid email required
+                      </p>
+                    )}
                     <input
                       type="email"
                       value={email}
                       onChange={handleInputChange}
                       required
+                      className={!isValidEmail ? styles.invalidInput : styles.inputForm}
                     />
                   </label>
                   <button type="submit">Subscribe to monthly newsletter</button>
@@ -84,6 +87,13 @@ export default function Home() {
               />
             </div>
           </div>
+        </div>
+        <div className={styles.attribution}>
+          Challenge by{" "}
+          <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">
+            Frontend Mentor
+          </a>
+          . Coded by <a href="#">Juan Carlos Plaza</a>.
         </div>
       </main>
       <style jsx global>{`

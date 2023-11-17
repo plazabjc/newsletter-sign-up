@@ -1,5 +1,5 @@
 .container {
-  min-height: 100vh;
+  max-height: 100vh;
   padding: 0;
   margin: 0;
   display: flex;
@@ -87,6 +87,33 @@
 .formContent form label,
 .formContent form label input {
   display: block;
+}
+
+.inputForm {
+  height: 42px;
+  border-radius: 7px;
+  border: 1px solid #9d9d9d;
+  color: #9d9d9d;
+  width: 90%;
+}
+
+.invalidEmail {
+  color: red;
+  position: absolute;
+  top: 0px;
+  right: 0;
+}
+
+.attribution {
+  position: absolute;
+  bottom: 0;
+  font-size: 11px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.attribution a {
+  color: hsl(228, 45%, 44%);
 }
 
 @media (max-width: 600px) {
