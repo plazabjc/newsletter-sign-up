@@ -73,7 +73,9 @@ export default function Home() {
                       value={email}
                       onChange={handleInputChange}
                       required
-                      className={!isValidEmail ? styles.invalidInput : styles.inputForm}
+                      className={
+                        !isValidEmail ? styles.invalidInput : styles.inputForm
+                      }
                     />
                   </label>
                   <button type="submit">Subscribe to monthly newsletter</button>
